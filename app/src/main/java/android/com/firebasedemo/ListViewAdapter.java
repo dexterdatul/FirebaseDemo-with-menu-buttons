@@ -1,0 +1,56 @@
+package android.com.firebasedemo;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import java.util.List;
+
+/**
+ * Created by Dexter John Datul on 13/09/2017.
+ */
+
+public class ListViewAdapter extends BaseAdapter {
+
+    Activity activity;
+    List<User> listUsers;
+    LayoutInflater inflater;
+
+    public ListViewAdapter(Activity activity, List<User> listUsers) {
+        this.activity = activity;
+        this.listUsers = listUsers;
+    }
+
+    @Override
+    public int getCount() {
+        return listUsers.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return listUsers.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        inflater = (LayoutInflater)activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View itemView = inflater.inflate(R.layout.listview_item, null);
+
+        TextView txtUser = (TextView) itemView.findViewById(R.id.listName);
+        TextView txtEmail = (TextView) itemView.findViewById(R.id.listEmail);
+
+        txtUser.setText(listUsers.get(i).getName());
+        txtEmail.setText(listUsers.get(i).getEmail());
+
+        return itemView;
+    }
+}
